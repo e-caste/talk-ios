@@ -29,10 +29,12 @@ typedef NS_ENUM(NSInteger, NCPushNotificationType) {
     NCPushNotificationTypeChat,
     NCPushNotificationTypeDelete,
     NCPushNotificationTypeDeleteAll,
+    NCPushNotificationTypeDeleteMultiple,
     NCPushNotificationTypeAdminNotification
 };
 
 extern NSString * const kNCPNAppKey;
+extern NSString * const kNCPNAppIdKey;
 extern NSString * const kNCPNTypeKey;
 extern NSString * const kNCPNSubjectKey;
 extern NSString * const kNCPNIdKey;
@@ -53,6 +55,7 @@ extern NSString * const NCPushNotificationJoinVideoCallAcceptedNotification;
 @property (nonatomic, copy) NSString *roomToken;
 @property (nonatomic, assign) NSInteger roomId;
 @property (nonatomic, assign) NSInteger notificationId;
+@property (nonatomic, strong) NSArray *notificationIds;
 @property (nonatomic, copy) NSString *accountId;
 @property (nonatomic, copy) NSString *jsonString;
 @property (nonatomic, copy) NSString *responseUserText;

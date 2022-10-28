@@ -540,6 +540,11 @@ NSString * const NCChatViewControllerTalkToUserNotification = @"NCChatViewContro
         return;
     }
 
+    // If we stopped the chat, we don't want to resume it here
+    if (_hasStopped) {
+        return;
+    }
+
     // Check if new messages were added while the app was inactive (eg. via background-refresh)
     NCChatMessage *lastMessage = [[self->_messages objectForKey:[self->_dateSections lastObject]] lastObject];
     
@@ -557,6 +562,11 @@ NSString * const NCChatViewControllerTalkToUserNotification = @"NCChatViewContro
 
 -(void)appWillResignActive:(NSNotification*)notification
 {
+    // If we stopped the chat, we don't want to change anything here
+    if (_hasStopped) {
+        return;
+    }
+
     _hasReceiveNewMessages = NO;
     _startReceivingMessagesAfterJoin = YES;
     [self removeUnreadMessagesSeparator];
@@ -3732,7 +3742,7 @@ NSString * const NCChatViewControllerTalkToUserNotification = @"NCChatViewContro
     // Transcribe voice-message
     if ([message.messageType isEqualToString:kMessageTypeVoiceMessage]) {
         UIImage *transcribeActionImage = [[UIImage imageNamed:@"transcribe-action"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        UIAction *transcribeAction = [UIAction actionWithTitle:NSLocalizedString(@"Transcribe", @"TRANSLATORS this is for transcribing a voicemessage to text") image:transcribeActionImage identifier:nil handler:^(UIAction *action){
+        UIAction *transcribeAction = [UIAction actionWithTitle:NSLocalizedString(@"Transcribe", @"TRANSLATORS this is for transcribing a voice message to text") image:transcribeActionImage identifier:nil handler:^(UIAction *action){
             
             [self didPressTranscribeVoiceMessage:message];
         }];
