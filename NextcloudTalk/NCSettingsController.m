@@ -149,7 +149,7 @@ NSString * const kDidReceiveCallsFromOldAccount = @"receivedCallsFromOldAccount"
         [self subscribeForPushNotificationsForAccountId:accountId withCompletionBlock:nil];
     } else {
         [self setActiveAccountWithAccountId:accountId];
-        [JDStatusBarNotification showWithStatus:@"Account already added" dismissAfter:4.0f styleName:JDStatusBarStyleSuccess];
+//        [JDStatusBarNotification showWithStatus:@"Account already added" dismissAfter:4.0f styleName:JDStatusBarStyleSuccess];
     }
 }
 
